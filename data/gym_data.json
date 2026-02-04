@@ -1,0 +1,56 @@
+{
+  "gym_info": {
+    "name": "FitZone Fitness Center",
+    "tagline": "Crush your health and fitness goals in no time",
+    "description": "A premium fitness center offering world-class training and facilities"
+  },
+  
+  "membership": {
+    "types": [
+      {
+        "name": "Month to Month",
+        "price": "$165",
+        "duration": "per month",
+        "features": ["All classes access", "Locker facility", "Free guest pass (2/month)", "Flexible cancellation"]
+      },
+      {
+        "name": "6 Month Membership",
+        "price": "$145",
+        "duration": "per month",
+        "features": ["All classes access", "Locker facility", "Free guest pass (3/month)", "Personal training discount (10%)", "Nutrition consultation"]
+      },
+      {
+        "name": "1 Year Membership",
+        "price": "$125",
+        "duration": "per month",
+        "features": ["All classes access", "Locker facility", "Free guest pass (5/month)", "Personal training discount (20%)", "Free body composition analysis", "Nutrition consultation", "Priority class booking"]
+      }
+    ]
+  },
+  
+  "trainers": {
+    "available": true,
+    "info": "Yes, we have certified personal trainers available",
+    "specializations": ["Weight loss", "Strength training", "CrossFit", "Powerlifting", "Sports conditioning"],
+    "pricing": "Starting from $50 per session",
+    "booking": "Book through our front desk or chatbot"
+  },
+  
+  "timings": {
+    "weekdays": "5:00 AM - 11:00 PM",
+    "weekends": "6:00 AM - 10:00 PM",
+    "holidays": "7:00 AM - 8:00 PM"
+  },
+  
+  "facilities": {
+    "equipment": ["Free weights", "Cardio machines", "Strength machines", "Functional training area", "Boxing ring"],
+    "classes": ["CrossFit Group Classes", "Strength Training", "Personal Training", "HIIT", "Yoga", "Spinning"],
+    "amenities": ["Locker rooms with showers", "Sauna", "Parking", "Smoothie bar", "WiFi", "Towel service"]
+  },
+  
+  "contact": {
+    "phone": "YOUR_PHONE_HERE",
+    "email": "YOUR_EMAIL_HERE",
+    "address": "YOUR_ADDRESS_HERE"
+  }
+}

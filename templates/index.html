@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone Fitness Center - Transform Your Body</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-dumbbell"></i> FitZone
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#benefits">Benefits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#membership">Membership</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn-trial" href="#membership">Start Free Trial</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="hero-title">Crush your health and fitness goals in no time</h1>
+                    <p class="hero-subtitle">It doesn't matter if your goal is to get stronger, burn fat, or to just stay fit - our world class coaches will guide you every step of the way.</p>
+                    <div class="hero-buttons">
+                        <a href="#membership" class="btn btn-primary btn-lg me-3">Join Now</a>
+                        <a href="#about" class="btn btn-outline-light btn-lg">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">We offer something for everybody</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>CrossFit Group Classes</h3>
+                        <p>High-intensity functional training in a supportive group environment</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3>Strength Training</h3>
+                        <p>Build muscle and increase strength with our expert-designed programs</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Personal Training</h3>
+                        <p>One-on-one coaching tailored to your specific goals and needs</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Member Only Events</h3>
+                        <p>Exclusive events, workshops, and competitions for our members</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes Detail Section -->
+    <section class="classes-section py-5">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6">
+                    <span class="section-label">Group CrossFit Classes</span>
+                    <h2 class="section-title-left">Get fit while having fun with our group CrossFit classes</h2>
+                    <ul class="class-features">
+                        <li><i class="fas fa-check-circle"></i> Just 30 minutes long</li>
+                        <li><i class="fas fa-check-circle"></i> Warm up & workout included</li>
+                        <li><i class="fas fa-check-circle"></i> Fun is guaranteed</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="class-image-placeholder">
+                        <i class="fas fa-running"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <span class="section-label">Personal Training</span>
+                    <h2 class="section-title-left">Be guided every step of the way with one of our world class coaches</h2>
+                    <p class="mb-3">We have coaches in each one of the following categories:</p>
+                    <ul class="class-features">
+                        <li><i class="fas fa-check-circle"></i> Weight loss</li>
+                        <li><i class="fas fa-check-circle"></i> Competitive CrossFit</li>
+                        <li><i class="fas fa-check-circle"></i> Powerlifting</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="class-image-placeholder">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Section -->
+    <section id="membership" class="membership-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="section-label">Membership</span>
+                <h2 class="section-title">Crushing your health and fitness goals starts here...</h2>
+            </div>
+            <div class="row g-4">
+                <!-- Month to Month -->
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <h3>Month to Month</h3>
+                        <div class="price">
+                            <span class="amount">$165</span>
+                            <span class="period">/mo</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> All classes access</li>
+                            <li><i class="fas fa-check"></i> Locker facility</li>
+                            <li><i class="fas fa-check"></i> Free guest pass (2/month)</li>
+                            <li><i class="fas fa-check"></i> Flexible cancellation</li>
+                        </ul>
+                        <button class="btn btn-pricing">Choose Plan</button>
+                    </div>
+                </div>
+
+                <!-- 6 Month -->
+                <div class="col-lg-4">
+                    <div class="pricing-card featured">
+                        <div class="badge-popular">POPULAR</div>
+                        <h3>6 Month Membership</h3>
+                        <div class="price">
+                            <span class="amount">$145</span>
+                            <span class="period">/mo</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> All classes access</li>
+                            <li><i class="fas fa-check"></i> Locker facility</li>
+                            <li><i class="fas fa-check"></i> Free guest pass (3/month)</li>
+                            <li><i class="fas fa-check"></i> PT discount (10%)</li>
+                            <li><i class="fas fa-check"></i> Nutrition consultation</li>
+                        </ul>
+                        <button class="btn btn-pricing">Choose Plan</button>
+                    </div>
+                </div>
+
+                <!-- 1 Year -->
+                <div class="col-lg-4">
+                    <div class="pricing-card">
+                        <h3>1 Year Membership</h3>
+                        <div class="price">
+                            <span class="amount">$125</span>
+                            <span class="period">/mo</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li><i class="fas fa-check"></i> All classes access</li>
+                            <li><i class="fas fa-check"></i> Locker facility</li>
+                            <li><i class="fas fa-check"></i> Free guest pass (5/month)</li>
+                            <li><i class="fas fa-check"></i> PT discount (20%)</li>
+                            <li><i class="fas fa-check"></i> Body composition analysis</li>
+                            <li><i class="fas fa-check"></i> Priority booking</li>
+                        </ul>
+                        <button class="btn btn-pricing">Choose Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="section-title-left">About FitZone</h2>
+                    <p class="about-text">FitZone Fitness Center is more than just a gym - it's a community dedicated to helping you achieve your fitness goals. With state-of-the-art equipment, expert trainers, and a supportive environment, we're here to guide you on your fitness journey.</p>
+                    <p class="about-text">Whether you're a beginner or an experienced athlete, our diverse range of classes and personalized training programs ensure that everyone can find their path to success.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Active Members</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>15+</h3>
+                            <p>Expert Trainers</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>10+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Get In Touch</h2>
+                <p>Have questions? We'd love to hear from you!</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h4>Phone</h4>
+                        <p>YOUR_PHONE_HERE</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p>YOUR_EMAIL_HERE</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Address</h4>
+                        <p>YOUR_ADDRESS_HERE</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container text-center">
+            <p>&copy; 2024 FitZone Fitness Center. All rights reserved.</p>
+            <div class="social-icons mt-3">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot Button (Fixed on Right) -->
+    <button id="chatbot-toggle" class="chatbot-toggle">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- Chatbot Container -->
+    <div id="chatbot-container" class="chatbot-container">
+        <div class="chatbot-header">
+            <h5><i class="fas fa-robot"></i> FitZone Assistant</h5>
+            <button id="chatbot-close" class="chatbot-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="bot-message">
+                <p>👋 Hi! I'm your FitZone assistant. Ask me about memberships, trainers, timings, or facilities!</p>
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="user-input" placeholder="Type your question..." />
+            <button id="send-btn">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+
+</body>
+</html>
