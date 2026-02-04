@@ -256,6 +256,28 @@ html {
     color: rgba(0, 255, 136, 0.3);
 }
 
+/* Class Images */
+.class-image-box {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.class-image-box:hover {
+    border-color: #00ff88;
+    box-shadow: 0 15px 40px rgba(0, 255, 136, 0.3);
+    transform: translateY(-5px);
+}
+
+.class-image {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
 /* ========================================
    MEMBERSHIP SECTION
 ======================================== */
