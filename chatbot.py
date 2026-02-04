@@ -1,7 +1,6 @@
 import json
 import nltk
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 import re
 
@@ -33,9 +32,17 @@ class GymChatbot:
         # Remove special characters
         text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
         # Tokenize
-        tokens = word_tokenize(text)
+        try:
+            tokens = word_tokenize(text)
+        except:
+            # Fallback to simple split if word_tokenize fails
+            tokens = text.split()
         # Lemmatize
-        tokens = [self.lemmatizer.lemmatize(token) for token in tokens]
+        try:
+            tokens = [self.lemmatizer.lemmatize(token) for token in tokens]
+        except:
+            # If lemmatization fails, use original tokens
+            pass
         return tokens
     
     def detect_intent(self, user_input):

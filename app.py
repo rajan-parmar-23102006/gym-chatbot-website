@@ -1,6 +1,20 @@
+# Download NLTK data automatically on server startup
+import nltk
+import os
+
+# Download required NLTK data
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    print("Downloading NLTK data...")
+    nltk.download('punkt', quiet=True)
+    nltk.download('punkt_tab', quiet=True)
+    nltk.download('wordnet', quiet=True)
+    nltk.download('omw-1.4', quiet=True)
+    print("NLTK data downloaded successfully!")
+
 from flask import Flask, render_template, request, jsonify
 from chatbot import GymChatbot
-import os
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -33,6 +47,7 @@ def chat():
         })
     
     except Exception as e:
+        print(f"Error in chat endpoint: {str(e)}")
         return jsonify({
             'error': str(e),
             'status': 'error'
