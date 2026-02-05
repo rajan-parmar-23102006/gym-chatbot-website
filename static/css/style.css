@@ -672,9 +672,11 @@ html {
 
 .chatbot-input {
     display: flex;
-    padding: 15px;
+    padding: 12px;
     background: #1a1a1a;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    align-items: center;
+    gap: 8px;
 }
 
 .chatbot-input input {
@@ -682,10 +684,11 @@ html {
     background: #0f0f0f;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 25px;
-    padding: 12px 20px;
+    padding: 10px 15px;
     color: #fff;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     outline: none;
+    min-width: 0; /* Important for mobile - allows input to shrink */
 }
 
 .chatbot-input input:focus {
@@ -695,14 +698,18 @@ html {
 .chatbot-input button {
     background: linear-gradient(135deg, #00ff88, #00cc6f);
     border: none;
-    width: 45px;
-    height: 45px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px; /* Prevents shrinking on mobile */
     border-radius: 50%;
-    margin-left: 10px;
     color: #000;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: all 0.3s;
+    flex-shrink: 0; /* Prevents button from shrinking */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .chatbot-input button:hover {
@@ -768,5 +775,72 @@ html {
     .chatbot-container {
         bottom: 80px;
         height: 500px;
+        width: calc(100% - 20px);
+        right: 10px;
+        left: 10px;
+    }
+    
+    /* Mobile chatbot input fixes */
+    .chatbot-input {
+        padding: 10px;
+        gap: 6px;
+    }
+    
+    .chatbot-input input {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .chatbot-input button {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+        font-size: 0.9rem;
+    }
+    
+    .chatbot-messages {
+        padding: 15px 10px;
+    }
+    
+    .bot-message,
+    .user-message {
+        max-width: 85%;
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .chatbot-container {
+        width: calc(100% - 16px);
+        right: 8px;
+        left: 8px;
+        height: 450px;
+    }
+    
+    .chatbot-input {
+        padding: 8px;
+        gap: 6px;
+    }
+    
+    .chatbot-input input {
+        padding: 9px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .chatbot-input button {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        font-size: 0.85rem;
+    }
+    
+    .chatbot-header {
+        padding: 12px 15px;
+    }
+    
+    .chatbot-header h5 {
+        font-size: 1rem;
     }
 }
