@@ -10,9 +10,9 @@ load_dotenv(dotenv_path=env_path)
 
 # Debug: Check if API key is loaded
 if os.getenv('GROQ_API_KEY'):
-    print("✅ GROQ_API_KEY found in environment")
+    print("[OK] GROQ_API_KEY found in environment")
 else:
-    print("⚠️ GROQ_API_KEY NOT found! Check your .env file")
+    print("[WARNING] GROQ_API_KEY NOT found! Check your .env file")
 
 # Download required NLTK data
 try:
@@ -32,10 +32,10 @@ from chatbot import GymChatbot
 try:
     from chatbot_ai import GymChatbotAI
     AI_AVAILABLE = True
-    print("✅ AI Chatbot loaded successfully!")
+    print("[OK] AI Chatbot loaded successfully!")
 except Exception as e:
     AI_AVAILABLE = False
-    print(f"⚠️ AI Chatbot not available: {e}")
+    print(f"[WARNING] AI Chatbot not available: {e}")
     print("   Running with rule-based chatbot only.")
 
 # Initialize Flask app
@@ -48,9 +48,9 @@ ai_chatbot = None
 if AI_AVAILABLE:
     try:
         ai_chatbot = GymChatbotAI()
-        print("✅ AI Chatbot initialized!")
+        print("[OK] AI Chatbot initialized!")
     except Exception as e:
-        print(f"⚠️ Could not initialize AI chatbot: {e}")
+        print(f"[WARNING] Could not initialize AI chatbot: {e}")
         AI_AVAILABLE = False
 
 
@@ -60,6 +60,8 @@ def get_smart_response(user_message):
     1. Try rule-based first (instant, free, no API calls)
     2. If rule-based doesn't understand → use AI
     """
+    global AI_AVAILABLE, ai_chatbot
+    
     # First, try rule-based chatbot (fast & free)
     rule_response = rule_chatbot.get_response(user_message)
     
@@ -68,13 +70,15 @@ def get_smart_response(user_message):
         # Rule-based didn't understand → Use AI if available
         if AI_AVAILABLE and ai_chatbot:
             try:
+                print(f"[AI] Processing: {user_message}")
                 ai_response = ai_chatbot.get_response(user_message)
                 return ai_response
             except Exception as e:
-                print(f"AI Error: {e}")
+                print(f"[ERROR] AI Error: {e}")
                 # Fall back to rule-based response
                 return rule_response
         else:
+            print(f"[WARNING] AI not available, AI_AVAILABLE={AI_AVAILABLE}, ai_chatbot={ai_chatbot}")
             # No AI available, return rule-based response
             return rule_response
     else:
