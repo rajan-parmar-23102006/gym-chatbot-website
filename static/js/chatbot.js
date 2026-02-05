@@ -9,17 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
     
-    // Toggle chatbot visibility
+    // Open chatbot - hide button, show chat box
     chatbotToggle.addEventListener('click', function() {
-        chatbotContainer.classList.toggle('active');
-        if (chatbotContainer.classList.contains('active')) {
-            userInput.focus();
-        }
+        chatbotContainer.classList.add('active');
+        chatbotToggle.classList.add('hidden');
+        userInput.focus();
     });
     
-    // Close chatbot
+    // Close chatbot - show button again
     chatbotClose.addEventListener('click', function() {
         chatbotContainer.classList.remove('active');
+        chatbotToggle.classList.remove('hidden');
     });
     
     // Send message on button click

@@ -566,7 +566,7 @@ html {
     cursor: pointer;
     box-shadow: 0 5px 20px rgba(0, 255, 136, 0.4);
     z-index: 1000;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .chatbot-toggle:hover {
@@ -574,9 +574,15 @@ html {
     box-shadow: 0 8px 30px rgba(0, 255, 136, 0.6);
 }
 
+.chatbot-toggle.hidden {
+    opacity: 0;
+    transform: scale(0);
+    pointer-events: none;
+}
+
 .chatbot-container {
     position: fixed;
-    bottom: 100px;
+    bottom: 30px;
     right: 30px;
     width: 380px;
     height: 550px;
