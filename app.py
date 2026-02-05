@@ -1,6 +1,18 @@
 # Download NLTK data automatically on server startup
 import nltk
 import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file (find it relative to this script)
+env_path = Path(__file__).parent / '.env'
+load_dotenv(dotenv_path=env_path)
+
+# Debug: Check if API key is loaded
+if os.getenv('GROQ_API_KEY'):
+    print("✅ GROQ_API_KEY found in environment")
+else:
+    print("⚠️ GROQ_API_KEY NOT found! Check your .env file")
 
 # Download required NLTK data
 try:
@@ -16,11 +28,58 @@ except LookupError:
 from flask import Flask, render_template, request, jsonify
 from chatbot import GymChatbot
 
+# Try to import AI chatbot (optional - works without it too)
+try:
+    from chatbot_ai import GymChatbotAI
+    AI_AVAILABLE = True
+    print("✅ AI Chatbot loaded successfully!")
+except Exception as e:
+    AI_AVAILABLE = False
+    print(f"⚠️ AI Chatbot not available: {e}")
+    print("   Running with rule-based chatbot only.")
+
 # Initialize Flask app
 app = Flask(__name__)
 
-# Initialize chatbot
-chatbot = GymChatbot()
+# Initialize chatbots
+rule_chatbot = GymChatbot()  # Fast, rule-based (always available)
+ai_chatbot = None
+
+if AI_AVAILABLE:
+    try:
+        ai_chatbot = GymChatbotAI()
+        print("✅ AI Chatbot initialized!")
+    except Exception as e:
+        print(f"⚠️ Could not initialize AI chatbot: {e}")
+        AI_AVAILABLE = False
+
+
+def get_smart_response(user_message):
+    """
+    HYBRID APPROACH - Best of both worlds!
+    1. Try rule-based first (instant, free, no API calls)
+    2. If rule-based doesn't understand → use AI
+    """
+    # First, try rule-based chatbot (fast & free)
+    rule_response = rule_chatbot.get_response(user_message)
+    
+    # Check if rule-based understood the question
+    if "I'm not sure I understand" in rule_response:
+        # Rule-based didn't understand → Use AI if available
+        if AI_AVAILABLE and ai_chatbot:
+            try:
+                ai_response = ai_chatbot.get_response(user_message)
+                return ai_response
+            except Exception as e:
+                print(f"AI Error: {e}")
+                # Fall back to rule-based response
+                return rule_response
+        else:
+            # No AI available, return rule-based response
+            return rule_response
+    else:
+        # Rule-based understood → use its response (faster!)
+        return rule_response
 
 @app.route('/')
 def home():
@@ -29,7 +88,7 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    """Handle chatbot requests"""
+    """Handle chatbot requests - uses HYBRID approach"""
     try:
         # Get user message from request
         user_message = request.json.get('message', '')
@@ -37,8 +96,8 @@ def chat():
         if not user_message:
             return jsonify({'error': 'No message provided'}), 400
         
-        # Get chatbot response
-        bot_response = chatbot.get_response(user_message)
+        # Get smart response (hybrid: rule-based + AI fallback)
+        bot_response = get_smart_response(user_message)
         
         # Return response as JSON
         return jsonify({
@@ -61,4 +120,4 @@ def health():
 if __name__ == '__main__':
     # Run the app
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='0.0.0.0', port=port, debug=False)

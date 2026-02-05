@@ -3,12 +3,17 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import re
+from pathlib import Path
 from difflib import SequenceMatcher  # NEW: For fuzzy matching
 
 class GymChatbot:
-    def __init__(self, data_file='data/gym_data.json'):
+    def __init__(self, data_file=None):
+        # Find data file relative to this script
+        if data_file is None:
+            data_file = Path(__file__).parent / 'data' / 'gym_data.json'
+        
         # Load gym data
-        with open(data_file, 'r') as f:
+        with open(data_file, 'r', encoding='utf-8') as f:
             self.gym_data = json.load(f)
         
         # Initialize NLTK tools
@@ -19,12 +24,17 @@ class GymChatbot:
             'membership': ['membership', 'member', 'plan', 'subscription', 'price', 'cost', 'fee', 'package'],
             'trainer': ['trainer', 'coach', 'personal training', 'pt', 'instructor'],
             'timing': ['time', 'timing', 'hours', 'open', 'close', 'schedule', 'when'],
-            'facilities': ['facility', 'facilities', 'equipment', 'amenity', 'amenities', 'what available'],
-            'classes': ['class', 'classes', 'group', 'session', 'workout'],
+            'facilities': ['facility', 'facilities', 'equipment', 'amenity', 'amenities', 'available'],
+            'classes': ['class', 'classes', 'group', 'session', 'workout', 'yoga', 'crossfit', 'hiit', 'spinning'],
             'contact': ['contact', 'phone', 'email', 'address', 'location', 'reach'],
             'greeting': ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon'],
             'thanks': ['thanks', 'thank you', 'appreciate', 'grateful']
         }
+        
+        # Questions that should ALWAYS go to AI (not handled by rule-based)
+        self.ai_triggers = ['name', 'who are you', 'your name', 'discount', 'offer', 'promotion', 
+                           'deal', 'cancel', 'refund', 'compare', 'recommend', 'suggest', 'best',
+                           'which plan', 'help me', 'created', 'made you', 'bot']
     
     def similarity_score(self, str1, str2):
         """NEW: Calculate similarity between two strings (0 to 1)"""
@@ -53,8 +63,14 @@ class GymChatbot:
     def detect_intent(self, user_input):
         """Detect what the user is asking about"""
         tokens = self.preprocess_text(user_input)
+        user_lower = user_input.lower()
         
-        # FIRST: Try exact matching (original logic - untouched)
+        # FIRST: Check if this should go to AI (complex questions)
+        for trigger in self.ai_triggers:
+            if trigger in user_lower:
+                return 'unknown'  # This will trigger AI fallback
+        
+        # SECOND: Try exact matching (original logic)
         for intent, keywords in self.patterns.items():
             for keyword in keywords:
                 keyword_tokens = self.preprocess_text(keyword)
