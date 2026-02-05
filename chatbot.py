@@ -3,6 +3,7 @@ import nltk
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 import re
+from difflib import SequenceMatcher  # NEW: For fuzzy matching
 
 class GymChatbot:
     def __init__(self, data_file='data/gym_data.json'):
@@ -24,6 +25,10 @@ class GymChatbot:
             'greeting': ['hi', 'hello', 'hey', 'greetings', 'good morning', 'good afternoon'],
             'thanks': ['thanks', 'thank you', 'appreciate', 'grateful']
         }
+    
+    def similarity_score(self, str1, str2):
+        """NEW: Calculate similarity between two strings (0 to 1)"""
+        return SequenceMatcher(None, str1.lower(), str2.lower()).ratio()
     
     def preprocess_text(self, text):
         """Clean and prepare text for processing"""
@@ -49,7 +54,7 @@ class GymChatbot:
         """Detect what the user is asking about"""
         tokens = self.preprocess_text(user_input)
         
-        # Check each pattern category
+        # FIRST: Try exact matching (original logic - untouched)
         for intent, keywords in self.patterns.items():
             for keyword in keywords:
                 keyword_tokens = self.preprocess_text(keyword)
@@ -57,7 +62,25 @@ class GymChatbot:
                 if any(kt in tokens for kt in keyword_tokens):
                     return intent
         
-        return 'unknown'
+        # NEW: If no exact match, try fuzzy matching for typos
+        best_match_score = 0
+        best_intent = 'unknown'
+        
+        for intent, keywords in self.patterns.items():
+            for keyword in keywords:
+                for token in tokens:
+                    # Skip very short words (less than 4 characters)
+                    if len(token) < 4:
+                        continue
+                    
+                    similarity = self.similarity_score(token, keyword)
+                    
+                    # If similarity is 85% or higher, consider it a match
+                    if similarity >= 0.85 and similarity > best_match_score:
+                        best_match_score = similarity
+                        best_intent = intent
+        
+        return best_intent
     
     def get_response(self, user_input):
         """Generate appropriate response based on user input"""
