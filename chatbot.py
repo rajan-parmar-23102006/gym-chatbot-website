@@ -1,9 +1,9 @@
-import json
+import json     # for read jaosn data 
 import nltk
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-import re
-from pathlib import Path
+from nltk.tokenize import word_tokenize       # text tokenize (nltk)
+from nltk.stem import WordNetLemmatizer    # reduce text complexity (runninngg  -  run)
+import re                                # for text cleaning 
+from pathlib import Path     
 from difflib import SequenceMatcher  # NEW: For fuzzy matching
 
 class GymChatbot:

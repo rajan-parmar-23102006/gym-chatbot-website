@@ -5,18 +5,18 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables from .env file (find it relative to this script)
-env_path = Path(__file__).parent / '.env'
-load_dotenv(dotenv_path=env_path)
+env_path = Path(__file__).parent / '.env'    # __file__ --> current path
+load_dotenv(dotenv_path=env_path) 
 
 # Debug: Check if API key is loaded
 if os.getenv('GROQ_API_KEY'):
-    print("[OK] GROQ_API_KEY found in environment")
+    print("[OK] GROQ_API_KEY found in environment")  
 else:
     print("[WARNING] GROQ_API_KEY NOT found! Check your .env file")
 
 # Download required NLTK data
 try:
-    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('tokenizers/punkt') #       Checks if NLTK data exists
 except LookupError:
     print("Downloading NLTK data...")
     nltk.download('punkt', quiet=True)
@@ -119,9 +119,11 @@ def chat():
 @app.route('/health')
 def health():
     """Health check endpoint for deployment"""
-    return jsonify({'status': 'healthy'}), 200
+    return jsonify({'status': 'healthy'}), 200   # okay 
 
-if __name__ == '__main__':
-    # Run the app
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+if __name__ == '__main__':   # starting point of web app 
+    # Run the app         
+    port = int(os.environ.get('PORT', 5000))      # on which port our website is live 
+    app.run(host='0.0.0.0', port=port, debug=False)    #  debug=False --> production server  , true --> developmnent server (show all codes (security risk ))
+     
+    
