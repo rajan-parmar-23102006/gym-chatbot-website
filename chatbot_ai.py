@@ -1,16 +1,3 @@
-"""
-AI-Powered Gym Chatbot using Groq API
-=====================================
-This chatbot uses Groq's ultra-fast LLM API to provide intelligent responses
-about FitZone Fitness Center. It can handle ANY question intelligently!
-
-Why Groq?
-- Ultra-fast responses (fastest LLM inference in market)
-- Free tier: 14,400 requests/day
-- Excellent models: Llama 3, Mixtral
-- No credit card required
-"""
-
 import json
 import os
 from pathlib import Path
@@ -26,8 +13,8 @@ class GymChatbotAI:
         """Initialize AI chatbot with gym data context"""
         
         # Find data file relative to this script
-        if data_file is None:
-            data_file = Path(__file__).parent / 'data' / 'gym_data.json'
+        if data_file is None: 
+            data_file = Path(__file__).parent / 'data' / 'gym_data.json' 
         
         # Load gym data
         with open(data_file, 'r', encoding='utf-8') as f:
@@ -121,7 +108,7 @@ Remember: Be helpful, accurate, and always encourage fitness! 💪"""
     
     def get_response(self, user_input):
         """Get AI-powered response using Groq"""
-        
+                        
         if not user_input or not user_input.strip():
             return "Hi there! 👋 How can I help you today?"
         
